@@ -17,7 +17,7 @@ const Home: NextPage = () => {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<Box>{data?.user ? <Chat /> : <Auth />}</Box>
+			<Box>{data?.user.username ? <Chat /> : <Auth />}</Box>
 		</div>
 	);
 };
