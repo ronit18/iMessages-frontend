@@ -1,6 +1,6 @@
+import * as React from "react";
 import { Button } from "@chakra-ui/react";
 import { signOut } from "next-auth/react";
-import * as React from "react";
 
 interface IChatProps {}
 
