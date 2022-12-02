@@ -1,6 +1,10 @@
-import { NextPage } from "next";
+import { Box } from "@chakra-ui/react";
+import { NextPage, NextPageContext } from "next";
+import { getSession, useSession } from "next-auth/react";
 import Head from "next/head";
-import { signIn, signOut, useSession } from "next-auth/react";
+import Auth from "../components/Auth/Auth";
+import Chat from "../components/Chat/Chat";
+import { Session } from "next-auth";
 
 const Home: NextPage = () => {
 	const { data } = useSession();
@@ -13,28 +17,18 @@ const Home: NextPage = () => {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<div>
-				<h1>Hello</h1>
-
-				{data?.user ? (
-					<>
-						{data?.user?.name}
-						<br />
-						<img src={data?.user?.image} alt="me" />
-						<br />
-
-						<button onClick={() => signOut()}>Sign Out</button>
-					</>
-				) : (
-					<>
-						<button onClick={() => signIn("google")}>
-							sign in
-						</button>
-					</>
-				)}
-			</div>
+			<Box>{data?.user ? <Chat /> : <Auth />}</Box>
 		</div>
 	);
 };
 
+export async function getServerSideProps(context: NextPageContext) {
+	const session = await getSession(context);
+
+	return {
+		props: {
+			session,
+		},
+	};
+}
 export default Home;
