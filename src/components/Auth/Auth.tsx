@@ -3,12 +3,12 @@ import { Button, Center, Image, Input, Stack, Text } from "@chakra-ui/react";
 import { Session } from "@prisma/client";
 import { signIn } from "next-auth/react";
 
-interface IAuthProps {
+interface AuthProps {
 	session: Session | null;
 	reloadSession: () => void;
 }
 
-const Auth: React.FC<IAuthProps> = ({ session, reloadSession }) => {
+const Auth: React.FC<AuthProps> = ({ session, reloadSession }) => {
 	const [username, setUsername] = React.useState("");
 	const onSubmit = async () => {
 		try {

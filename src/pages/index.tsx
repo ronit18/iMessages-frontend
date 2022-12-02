@@ -4,7 +4,6 @@ import { NextPage, NextPageContext } from "next";
 import { getSession, useSession } from "next-auth/react";
 import Auth from "../components/Auth/Auth";
 import Chat from "../components/Chat/Chat";
-import { Session } from "next-auth";
 
 const Home: NextPage = () => {
 	const { data: session } = useSession();
@@ -19,7 +18,7 @@ const Home: NextPage = () => {
 			</Head>
 
 			<Box>
-				{session?.user.username ? (
+				{session?.user?.username ? (
 					<Chat />
 				) : (
 					<Auth session={session} reloadSession={reloadSession} />
